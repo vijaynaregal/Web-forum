@@ -43,22 +43,25 @@ public class jdisplaytopic extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    List<jtopiclist> entries = new ArrayList<jtopiclist>();
 		List<jsubtopiclist> entries1 = new ArrayList<jsubtopiclist>();
-
+	    List<jforumlist> entries2 = new ArrayList<jforumlist>();
+		
         Connection c = null;
         try
         {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
             String username = "cs3220stu06";
             String password = "bI.*X*!.";
+    		Integer subid = Integer.valueOf(request.getParameter("id"));
+
 
             c = DriverManager.getConnection( url, username, password );
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "select * from topics" );
+            ResultSet rs = stmt.executeQuery( "select * from topics where subid="+subid );
 
             while( rs.next() )
                 entries.add( new jtopiclist( rs.getInt( "id" ),
                     rs.getString( "topic" ), rs.getString( "author" ),
-                    rs.getTimestamp( "date" ),rs.getString("content") ) );
+                    rs.getTimestamp( "date" ),rs.getString("content"),rs.getInt("subid") ) );
 
             c.close();
         }
@@ -111,7 +114,41 @@ public class jdisplaytopic extends HttpServlet {
                 throw new ServletException( e );
             }
         }
+        
+        try
+        {
+            String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
+            String username = "cs3220stu06";
+            String password = "bI.*X*!.";
+    		Integer id = Integer.valueOf(request.getParameter("id"));
 
+            c = DriverManager.getConnection( url, username, password );
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "select * from forum where id="+id );
+
+            while( rs.next() )
+                entries2.add( new jforumlist( rs.getInt( "id" ),
+                    rs.getString( "forum" ), rs.getInt( "topics" ), rs.getInt( "subid" ) ) );
+
+            c.close();
+        }
+        catch( SQLException e )
+        {
+            throw new ServletException( e );
+        }
+        finally
+        {
+            try
+            {
+                if( c != null ) c.close();
+            }
+            catch( SQLException e )
+            {
+                throw new ServletException( e );
+            }
+        }
+
+        request.setAttribute( "entries2", entries2 );
         request.setAttribute( "entries1", entries1 );
         request.setAttribute( "entries", entries );
         request.getRequestDispatcher( "/WEB-INF/jdisplaytopic.jsp" )
@@ -126,5 +163,3 @@ public class jdisplaytopic extends HttpServlet {
 	}
 
 }
-
-

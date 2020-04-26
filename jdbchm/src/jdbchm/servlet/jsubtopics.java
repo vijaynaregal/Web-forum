@@ -44,7 +44,7 @@ public class jsubtopics extends HttpServlet {
             while( rs.next() ) 
                 entries.add( new jtopiclist( rs.getInt( "id" ),
                     rs.getString( "topic" ), rs.getString( "author" ),
-                    rs.getTimestamp( "date" ),rs.getString("content") ) );
+                    rs.getTimestamp( "date" ),rs.getString("content"),rs.getInt( "subid" ) ) );
 
 
 
@@ -141,8 +141,9 @@ System.out.println(id);
 	                throw new ServletException( e );
 	            }
 	        }
+    		String id = String.valueOf(request.getParameter("id").toString());
 
-	        response.sendRedirect( "jdisplaytopic" );
+	        response.sendRedirect( "jsubtopics?id="+id );
 	    }
 
 		}

@@ -10,15 +10,31 @@ String author;
 Integer replies;
 Date date;
 String content;
+Integer subid;
 
-public jtopiclist(Integer id,String topic,String author,Date date, String content) {
+public jtopiclist(Integer id,String topic,String author,Date date, String content,Integer subid) {
 	this.id = id;
 	this.topic = topic;
 	this.author =author;
 	//this.replies = replies;
 	this.date = date;
 	this.content = content;
+	this.subid = subid;
 }
+
+
+
+public Integer getSubid() {
+	return subid;
+}
+
+
+
+public void setSubid(Integer subid) {
+	this.subid = subid;
+}
+
+
 
 public jtopiclist(Integer replies) {
 	this.replies=replies;

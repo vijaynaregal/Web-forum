@@ -14,24 +14,18 @@
 <br/>
 <table  class="table table-hover table-sm table-bordered col-md-7">
     <tr>
-      <th >Topic</th>
-      <th >Author</th>
-      <th >Replies</th>
-      <th >Last Post</th>
+      <th >Forum</th>
+      <th >Topics</th>
     </tr>
     <c:forEach items="${entries}" var="entry"> 
     <tr>
-    <td><a href='jsubtopics?id=${entry.id}'>${entry.topic}</a></td>
-    <td>${entry.author}</td>
-    <td>${entry.id}</td>
-    <td>${entry.date}</td>
+    <td><a href='jdisplaytopic?id=${entry.id}'>${entry.forum}</a></td>
+    <td>${entry.topics}</td>
     </tr>
     </c:forEach>
 </table>
 <br/>
 </div>
-    <c:forEach items="${entries2}" var="entry"> 
-<p><a href='jcreatetopic?id=${entry.id}'>Create Topic </a></p>
-</c:forEach>
+<p><a href="jcreateforum"> Create Forum </a></p>
 </body>
 </html>
