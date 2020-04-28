@@ -44,7 +44,8 @@ public class jdisplaytopic extends HttpServlet {
 	    List<jtopiclist> entries = new ArrayList<jtopiclist>();
 		List<jsubtopiclist> entries1 = new ArrayList<jsubtopiclist>();
 	    List<jforumlist> entries2 = new ArrayList<jforumlist>();
-		
+	    List<jtopiclist> entries3 = new ArrayList<jtopiclist>();
+
         Connection c = null;
         try
         {
@@ -123,6 +124,7 @@ public class jdisplaytopic extends HttpServlet {
     		Integer id = Integer.valueOf(request.getParameter("id"));
 
             c = DriverManager.getConnection( url, username, password );
+            
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "select * from forum where id="+id );
 
@@ -148,6 +150,39 @@ public class jdisplaytopic extends HttpServlet {
             }
         }
 
+        try
+        {
+            String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
+            String username = "cs3220stu06";
+            String password = "bI.*X*!.";
+    		Integer subid = Integer.valueOf(request.getParameter("id"));
+
+            c = DriverManager.getConnection( url, username, password );
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "select count(id) as replies from tp where id ="+subid );
+
+            while( rs.next() )
+                entries3.add( new jtopiclist(rs.getInt("replies") ) );
+
+            c.close();
+        }
+        catch( SQLException e )
+        {
+            throw new ServletException( e );
+        }
+        finally
+        {
+            try
+            {
+                if( c != null ) c.close();
+            }
+            catch( SQLException e )
+            {
+                throw new ServletException( e );
+            }
+        }
+        
+        request.setAttribute( "entries3", entries3 );
         request.setAttribute( "entries2", entries2 );
         request.setAttribute( "entries1", entries1 );
         request.setAttribute( "entries", entries );

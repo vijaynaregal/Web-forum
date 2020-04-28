@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/jsubtopics")
 public class jsubtopics extends HttpServlet {
@@ -25,6 +26,9 @@ public class jsubtopics extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		 
+		
 		List<jtopiclist> entries = new ArrayList<jtopiclist>();
 		List<jsubtopiclist> entries1 = new ArrayList<jsubtopiclist>();
         Connection c = null;
@@ -66,6 +70,12 @@ public class jsubtopics extends HttpServlet {
             }
         }
         
+        HttpSession session=request.getSession(false);  
+        session.getAttribute("user");  
+        session.getAttribute("pass");  
+        if (session != null) {
+            if (session.getAttribute("user") != null) {	          
+  
         try
         {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
@@ -104,6 +114,8 @@ public class jsubtopics extends HttpServlet {
         request.setAttribute( "entries1", entries1 );
         request.getRequestDispatcher( "/WEB-INF/jsubtopics.jsp" )
             .forward( request, response );
+    }else response.sendRedirect( "jloginsession" );}
+
 
 	}
 

@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/jcreatetopic")
@@ -28,7 +29,15 @@ public class jcreatetopic extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    List<jforumlist> entries2 = new ArrayList<jforumlist>();
+	   
+		  HttpSession session=request.getSession(false);  
+	        session.getAttribute("user");  
+	        session.getAttribute("pass");  
+	        if (session != null) {
+	            if (session.getAttribute("user") != null) {	          
+	  
+		
+		List<jforumlist> entries2 = new ArrayList<jforumlist>();
         Connection c = null;
 
 	    try
@@ -68,6 +77,8 @@ public class jcreatetopic extends HttpServlet {
 		
 		request.getRequestDispatcher( "/WEB-INF/jcreatetopic.jsp" )
         .forward( request, response );
+	            }else response.sendRedirect( "jloginsession" );}
+
 	}
 
 

@@ -3,6 +3,7 @@ package jdbchm.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(urlPatterns = "/jforum")
@@ -27,7 +29,7 @@ public class jforum extends HttpServlet {
     }
 
     public void init( ServletConfig config ) throws ServletException
-    {
+    {	
         super.init( config );
 
         try
@@ -38,13 +40,19 @@ public class jforum extends HttpServlet {
         {
             throw new ServletException( e );
         }
+        
+
     }
     
+	
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    List<jforumlist> entries = new ArrayList<jforumlist>();
+	
+	            	
+		List<jforumlist> entries = new ArrayList<jforumlist>();
 	    List<jtopiclist> entries1 = new ArrayList<jtopiclist>();
-
-
+	    List<jforumlist> entries2 = new ArrayList<jforumlist>();
+	    
         Connection c = null;
         try
         {
@@ -110,20 +118,53 @@ finally
         throw new ServletException( e );
     }
 }
+        try
+        {
+            String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
+            String username = "cs3220stu06";
+            String password = "bI.*X*!.";
+            int id=1;
+            c = DriverManager.getConnection( url, username, password );
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "select count(subid) as topics from topics where subid ="+id );
 
+            while( rs.next() )
+                entries2.add( new jforumlist( rs.getInt( "topics" )) );
+            
+            c.close();
+        }
+        catch( SQLException e )
+        {
+            throw new ServletException( e );
+        }
+        finally
+        {
+            try
+            {
+                if( c != null ) c.close();
+            }
+            catch( SQLException e )
+            {
+                throw new ServletException( e );
+            }
+        }
+
+        request.setAttribute( "entries2", entries2 );
         request.setAttribute( "entries1", entries1 );
         request.setAttribute( "entries", entries );
         request.getRequestDispatcher( "/WEB-INF/jforum.jsp" )
             .forward( request, response );
-    }
+	    }
+
 
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-
+		
+       
+	}
 	}
 
-}
+
 
 

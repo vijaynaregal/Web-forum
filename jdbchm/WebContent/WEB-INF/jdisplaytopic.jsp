@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DISPLAY TOPICS</title>
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
 <body>
@@ -23,7 +23,7 @@
     <tr>
     <td><a href='jsubtopics?id=${entry.id}'>${entry.topic}</a></td>
     <td>${entry.author}</td>
-    <td>${entry.id}</td>
+    <td><c:forEach items="${entries3}" var="entry1"> ${entry1.replies}</c:forEach></td>
     <td>${entry.date}</td>
     </tr>
     </c:forEach>

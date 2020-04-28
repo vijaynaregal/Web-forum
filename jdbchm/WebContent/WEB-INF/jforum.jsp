@@ -12,6 +12,8 @@
 <div class="table-responsive">
 <br/>
 <br/>
+
+<a href='jlogoutsession'>Logout</a>
 <table  class="table table-hover table-sm table-bordered col-md-7">
     <tr>
       <th >Forum</th>
@@ -20,7 +22,8 @@
     <c:forEach items="${entries}" var="entry"> 
     <tr>
     <td><a href='jdisplaytopic?id=${entry.id}'>${entry.forum}</a></td>
-    <td>${entry.topics}</td>
+        <c:forEach items="${entries2}" var="entry"> 
+    <td>${entry.topics}</td></c:forEach>
     </tr>
     </c:forEach>
 </table>

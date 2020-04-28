@@ -11,6 +11,9 @@ public jforumlist(Integer id,String forum,Integer topics,Integer subid) {
 	this.topics=topics;
 	this.subid=subid;
 }
+public jforumlist(Integer topics) {
+	this.topics=topics;
+}
 
 
 public Integer getSubid() {
