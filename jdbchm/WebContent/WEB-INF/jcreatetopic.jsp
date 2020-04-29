@@ -9,7 +9,14 @@
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
 <body>
-<div align='center'>Current User:${currentuser} |<a href='jloginsession'>Login</a> |<a href='jlogoutsession'>Logout</a></div>
+<div align='center'>
+<c:if test="${sessionScope.username != null}">
+Current User:${currentuser} | <a href='jlogoutsession'>Logout</a>
+</c:if>
+<c:if test="${sessionScope.username == null}">
+<a href='jloginsession'>Login</a>
+</c:if>
+</div>
 
            <c:forEach items="${entries2}" var="entry"> 
 
