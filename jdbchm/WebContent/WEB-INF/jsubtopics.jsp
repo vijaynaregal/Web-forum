@@ -12,6 +12,7 @@
 <div class="table-responsive">
 <br/>
 <br/>
+<div align='center'>Current User : ${currentuser} |<a href='jloginsession'>Login</a> |<a href='jlogoutsession'>Logout</a></div>
 <table  class="table table-hover table-sm table-bordered col-md-7">
     <tr>
       <th >Author</th>
@@ -39,7 +40,7 @@
 <tr> 
 
         <th>Your Name</th>
-        <td> <input type='text' name='name' value=''  /></td>
+        <td> <input type='text' name='name' value='${currentuser}' readonly /></td>
         </tr>
                     <c:forEach items="${entries}" var="entry"> 
        <td> <input type='hidden' name='id' value='${ entry.id}'/></td></c:forEach>     

@@ -12,6 +12,7 @@
 <div class="table-responsive">
 <br/>
 <br/>
+<div align='center'>Current User : ${currentuser} |<a href='jloginsession'>Login</a> |<a href='jlogoutsession'>Logout</a></div>
 <table  class="table table-hover table-sm table-bordered col-md-7">
     <tr>
       <th >Topic</th>

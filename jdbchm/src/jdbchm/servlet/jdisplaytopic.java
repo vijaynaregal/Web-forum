@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(urlPatterns = "/jdisplaytopic")
@@ -46,6 +47,10 @@ public class jdisplaytopic extends HttpServlet {
 	    List<jforumlist> entries2 = new ArrayList<jforumlist>();
 	    List<jtopiclist> entries3 = new ArrayList<jtopiclist>();
 
+	    HttpSession session=request.getSession(true);
+        session.getAttribute("currentuser");  
+       
+	    
         Connection c = null;
         try
         {
@@ -188,13 +193,15 @@ public class jdisplaytopic extends HttpServlet {
         request.setAttribute( "entries", entries );
         request.getRequestDispatcher( "/WEB-INF/jdisplaytopic.jsp" )
             .forward( request, response );
+
     }
 
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	//	 String currentuser = "hello";
 
+      
 	}
 
 }

@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Display Forum</title>
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
 <body>
 <div class="table-responsive">
 <br/>
 <br/>
-
-<a href='jlogoutsession'>Logout</a>
+<div align='center'>Current User:${currentuser} |<a href='jloginsession'>Login</a> |<a href='jlogoutsession'>Logout</a></div>
 <table  class="table table-hover table-sm table-bordered col-md-7">
     <tr>
       <th >Forum</th>
@@ -26,6 +25,7 @@
     <td>${entry.topics}</td></c:forEach>
     </tr>
     </c:forEach>
+        		
 </table>
 <br/>
 </div>

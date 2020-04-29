@@ -31,6 +31,14 @@ public class jsubtopics extends HttpServlet {
 		
 		List<jtopiclist> entries = new ArrayList<jtopiclist>();
 		List<jsubtopiclist> entries1 = new ArrayList<jsubtopiclist>();
+		
+
+        HttpSession session=request.getSession(false);  
+        session.getAttribute("username"); 
+        session.getAttribute("currentuser");  
+        if (session != null) {
+            if (session.getAttribute("username") != null) {	   
+		
         Connection c = null;
 		Integer id = Integer.valueOf(request.getParameter("id"));
 
@@ -70,12 +78,7 @@ public class jsubtopics extends HttpServlet {
             }
         }
         
-        HttpSession session=request.getSession(false);  
-        session.getAttribute("user");  
-        session.getAttribute("pass");  
-        if (session != null) {
-            if (session.getAttribute("user") != null) {	          
-  
+       
         try
         {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
@@ -109,12 +112,14 @@ public class jsubtopics extends HttpServlet {
                 throw new ServletException( e );
             }
         }
-
         request.setAttribute( "entries", entries );
         request.setAttribute( "entries1", entries1 );
+
         request.getRequestDispatcher( "/WEB-INF/jsubtopics.jsp" )
-            .forward( request, response );
-    }else response.sendRedirect( "jloginsession" );}
+        .forward( request, response );       
+
+            }else response.sendRedirect( "jloginsession" );
+ }
 
 
 	}

@@ -31,10 +31,10 @@ public class jcreatetopic extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   
 		  HttpSession session=request.getSession(false);  
-	        session.getAttribute("user");  
-	        session.getAttribute("pass");  
+	        session.getAttribute("username"); 
+	        session.getAttribute("currentuser");  
 	        if (session != null) {
-	            if (session.getAttribute("user") != null) {	          
+	            if (session.getAttribute("username") != null) {	          
 	  
 		
 		List<jforumlist> entries2 = new ArrayList<jforumlist>();

@@ -53,6 +53,10 @@ public class jforum extends HttpServlet {
 	    List<jtopiclist> entries1 = new ArrayList<jtopiclist>();
 	    List<jforumlist> entries2 = new ArrayList<jforumlist>();
 	    
+	    HttpSession session=request.getSession(true);
+        session.getAttribute("currentuser");  
+       
+	    
         Connection c = null;
         try
         {

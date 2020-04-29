@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Create Forum</title>
 </head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
 <body>
 <p class="font-weight-bold"><a href="jforum">C3220 Web Programming</a>>Create Forum</p>
-
+<div align='center'>Current User:${currentuser} | <a href='jloginsession'>Login</a> |<a href='jlogoutsession'>Logout</a></div>
 <form action='jcreateforum' method='post'>
   <div class="form-group">
 <table class="table table-hover table-sm table-bordered col-md-7">

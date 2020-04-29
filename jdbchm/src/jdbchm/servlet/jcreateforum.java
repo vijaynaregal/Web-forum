@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,18 +27,15 @@ public class jcreateforum extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		    
-	    	  
 		        HttpSession session=request.getSession(false);  
-		        session.getAttribute("user");  
-		        session.getAttribute("pass");  
+		       String a=(String) session.getAttribute("username");
+		        session.getAttribute("currentuser");  
 		        if (session != null) {
-		            if (session.getAttribute("user") != null) {	          
-		  
-        
+		            if (session.getAttribute("username")!=null&&a.equals("jdoe1")) {	
+		          
 		request.getRequestDispatcher( "/WEB-INF/jcreateforum.jsp" )
         .forward( request, response );
-		            }else response.sendRedirect( "jloginsession" );}
-
+		            }else response.sendRedirect( "jerror" );}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
