@@ -31,7 +31,7 @@ Current User:${currentuser} | <a href='jlogoutsession'>Logout</a>
     <tr>
     <td><a href='jsubtopics?id=${entry.id}'>${entry.topic}</a></td>
     <td>${entry.author}</td>
-    <td><c:forEach items="${entries3}" var="entry1"> ${entry1.replies}</c:forEach></td>
+    <td>${entry.replies}</td>
     <td>${entry.date}</td>
     </tr>
     </c:forEach>

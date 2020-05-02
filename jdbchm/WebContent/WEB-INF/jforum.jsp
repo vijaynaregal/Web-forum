@@ -27,12 +27,10 @@ Current User:${currentuser} | <a href='jlogoutsession'>Logout</a>
     </tr>
     <c:forEach items="${entries}" var="entry"> 
    <tr>
-    <td><a href='jdisplaytopic?id=${entry.id}'>${entry.forum}</a></td>
-        <c:forEach items="${entries2}" var="entry"> 
-    <td>${entry.topics}</td></c:forEach>
+    <td><a href='jdisplaytopic?id=${entry.id}'>${entry.forum}</a></td>   
+    <td>${entry.topics}</td>
     </tr>
     </c:forEach>
-        		
 </table>
 <br/>
 </div>

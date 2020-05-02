@@ -12,11 +12,11 @@ Date date;
 String content;
 Integer subid;
 
-public jtopiclist(Integer id,String topic,String author,Date date, String content,Integer subid) {
+public jtopiclist(Integer id,String topic,String author,Integer replies,Date date, String content,Integer subid) {
 	this.id = id;
 	this.topic = topic;
 	this.author =author;
-	//this.replies = replies;
+	this.replies = replies;
 	this.date = date;
 	this.content = content;
 	this.subid = subid;

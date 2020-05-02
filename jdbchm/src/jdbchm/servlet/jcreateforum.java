@@ -46,13 +46,14 @@ public class jcreateforum extends HttpServlet {
             String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
             String username = "cs3220stu06";
             String password = "bI.*X*!.";
-           
-            String sql = "insert into forum (forum) values (?)";
+            int a =0;
+            String sql = "insert into forum (forum, topics) values (?, ?)";
 
             c = DriverManager.getConnection( url, username, password );
            
             PreparedStatement pstmt = c.prepareStatement( sql );
             pstmt.setString( 1, request.getParameter( "forum" ) );
+            pstmt.setInt( 2, a );
             pstmt.executeUpdate();
             c.close();
         }

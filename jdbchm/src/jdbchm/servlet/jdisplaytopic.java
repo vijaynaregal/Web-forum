@@ -66,7 +66,7 @@ public class jdisplaytopic extends HttpServlet {
 
             while( rs.next() )
                 entries.add( new jtopiclist( rs.getInt( "id" ),
-                    rs.getString( "topic" ), rs.getString( "author" ),
+                    rs.getString( "topic" ), rs.getString( "author" ),rs.getInt("replies"),
                     rs.getTimestamp( "date" ),rs.getString("content"),rs.getInt("subid") ) );
 
             c.close();
@@ -199,8 +199,6 @@ public class jdisplaytopic extends HttpServlet {
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//	 String currentuser = "hello";
-
       
 	}
 

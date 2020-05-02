@@ -72,7 +72,6 @@ public class jcreatetopic extends HttpServlet {
                 throw new ServletException( e );
             }
         }
-
         request.setAttribute( "entries2", entries2 );
 		
 		request.getRequestDispatcher( "/WEB-INF/jcreatetopic.jsp" )
@@ -90,15 +89,21 @@ public class jcreatetopic extends HttpServlet {
             String username = "cs3220stu06";
             String password = "bI.*X*!.";
     		Integer subid = Integer.valueOf(request.getParameter("id"));
+    		
 
-            String sql = "insert into topics (topic, author, date, content, subid) values (?, ?, now(), ?, ?)";
+            String sql = "insert into topics (topic, author, date, content, subid, replies) values (?, ?, now(), ?, ?, ?)";
 
             c = DriverManager.getConnection( url, username, password );
+            Statement stmt = c.createStatement();
+            
+            stmt.executeUpdate( "UPDATE forum SET topics = topics + 1 WHERE id = "+subid);
+
             PreparedStatement pstmt = c.prepareStatement( sql );
             pstmt.setString( 1, request.getParameter( "topic" ) );
             pstmt.setString( 2, request.getParameter( "author" ) );
             pstmt.setString( 3, request.getParameter( "content" ));
             pstmt.setInt( 4, subid);
+            pstmt.setInt( 5, 0);
             pstmt.executeUpdate();
             c.close();
         }
@@ -117,6 +122,7 @@ public class jcreatetopic extends HttpServlet {
                 throw new ServletException( e );
             }
         }
+       
 		Integer subid = Integer.valueOf(request.getParameter("id"));
         response.sendRedirect( "jdisplaytopic?id="+subid );
     }

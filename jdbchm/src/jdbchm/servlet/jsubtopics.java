@@ -55,7 +55,7 @@ public class jsubtopics extends HttpServlet {
             
             while( rs.next() ) 
                 entries.add( new jtopiclist( rs.getInt( "id" ),
-                    rs.getString( "topic" ), rs.getString( "author" ),
+                    rs.getString( "topic" ), rs.getString( "author" ),rs.getInt("replies"),
                     rs.getTimestamp( "date" ),rs.getString("content"),rs.getInt( "subid" ) ) );
 
 
@@ -133,9 +133,11 @@ public class jsubtopics extends HttpServlet {
 	            String password = "bI.*X*!.";
 
 	    		String id = String.valueOf(request.getParameter("id").toString());
-System.out.println(id);
+	    		
 	            String sql = "insert into tp (id, name,message,date) values (?, ?, ?, now())";
 	            c = DriverManager.getConnection( url, username, password );
+	            Statement stmt = c.createStatement();
+	            stmt.executeUpdate( "UPDATE topics SET replies = replies + 1 WHERE id = "+id);
 	            PreparedStatement pstmt = c.prepareStatement( sql );
 	            pstmt.setString( 1, id);
 	            pstmt.setString( 2, request.getParameter( "name" ) );

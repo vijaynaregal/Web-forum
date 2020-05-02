@@ -50,7 +50,6 @@ public class jforum extends HttpServlet {
 	            	
 		List<jforumlist> entries = new ArrayList<jforumlist>();
 	    List<jtopiclist> entries1 = new ArrayList<jtopiclist>();
-	    List<jforumlist> entries2 = new ArrayList<jforumlist>();
 
 	    HttpSession session=request.getSession(true);
         session.getAttribute("currentuser");  
@@ -101,7 +100,7 @@ public class jforum extends HttpServlet {
 
     while( rs.next() )
         entries1.add( new jtopiclist( rs.getInt( "id" ),
-            rs.getString( "topic" ), rs.getString( "author" ),
+            rs.getString( "topic" ), rs.getString( "author" ),rs.getInt("replies"),
             rs.getTimestamp( "date" ),rs.getString("content"),rs.getInt( "subid" ) ) );
 
     c.close();
@@ -121,48 +120,20 @@ finally
         throw new ServletException( e );
     }
 }
-        try
-        {
-            String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu06?useSSL=false&allowPublicKeyRetrieval=true";
-            String username = "cs3220stu06";
-            String password = "bI.*X*!.";
-            int id=1;            
-            c = DriverManager.getConnection( url, username, password );
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery( "select count(subid) as topics from topics where subid ="+id);
-
-            while( rs.next() )
-                entries2.add( new jforumlist( rs.getInt( "topics" )) );
-            
-            c.close();
-        }
-        catch( SQLException e )
-        {
-            throw new ServletException( e );
-        }
-        finally
-        {
-            try
-            {
-                if( c != null ) c.close();
-            }
-            catch( SQLException e )
-            {
-                throw new ServletException( e );
-            }
-        }
-        request.setAttribute( "entries2", entries2 );
-        request.setAttribute( "entries1", entries1 );
+              request.setAttribute( "entries1", entries1 );
         request.setAttribute( "entries", entries );
         request.getRequestDispatcher( "/WEB-INF/jforum.jsp" )
             .forward( request, response );
+        
+        
 	    }
 
 
 	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			}
+				
+	}
 	}
 
 

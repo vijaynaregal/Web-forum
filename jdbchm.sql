@@ -14,6 +14,7 @@ create table topics(
 id integer auto_increment primary key,
 topic varchar(200),
 author varchar(200),
+replies varchar(200),
 date timestamp,
 content varchar(8000),
 subid int
