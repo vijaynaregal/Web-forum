@@ -33,12 +33,7 @@ public class jsubtopics extends HttpServlet {
 		List<jsubtopiclist> entries1 = new ArrayList<jsubtopiclist>();
 		
 
-        HttpSession session=request.getSession(false);  
-        session.getAttribute("username"); 
-        session.getAttribute("currentuser");  
-        if (session != null) {
-            if (session.getAttribute("username") != null) {	   
-		
+       
         Connection c = null;
 		Integer id = Integer.valueOf(request.getParameter("id"));
 
@@ -118,13 +113,17 @@ public class jsubtopics extends HttpServlet {
         request.getRequestDispatcher( "/WEB-INF/jsubtopics.jsp" )
         .forward( request, response );       
 
-            }else response.sendRedirect( "jloginsession" );
- }
-
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		 HttpSession session=request.getSession(false);  
+	        session.getAttribute("username"); 
+	        session.getAttribute("currentuser");  
+	        if (session != null) {
+	            if (session.getAttribute("username") != null) {	   
+			
 		Connection c = null;
 	        try
 	        {
@@ -163,6 +162,8 @@ public class jsubtopics extends HttpServlet {
     		String id = String.valueOf(request.getParameter("id").toString());
 
 	        response.sendRedirect( "jsubtopics?id="+id );
+	            }else response.sendRedirect( "jloginsession" );
+	        }
 	    }
 
 		}

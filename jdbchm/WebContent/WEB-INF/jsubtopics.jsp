@@ -42,6 +42,7 @@ Current User:${currentuser} | <a href='jlogoutsession'>Logout</a>
     </c:forEach>
 </table>
 <br/>
+<c:if test="${sessionScope.username != null}">
 <form action='jsubtopics' method='post'>        
 <table class="table table-hover table-sm table-bordered col-md-7">
 <tr> 
@@ -59,6 +60,8 @@ Current User:${currentuser} | <a href='jlogoutsession'>Logout</a>
                 <tr><td colspan="2" rowspan="1"><input type='submit' name='reply' value='Reply' /></td></tr>
         </table>
 </form>
+</c:if>
+
 </div>
 </body>
 </html>
